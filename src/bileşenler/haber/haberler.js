@@ -115,3 +115,65 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+function haberYapici(index){
+  let parent1 = document.querySelector("div.articles");
+
+  let parent2 = document.createElement("div");
+  parent2.classList.add("article");
+
+  parent1.appendChild(parent2);
+
+  let parcalar = [];
+  parcalar[0] = document.createElement("h2");
+  parcalar[1] = document.createElement("p"); 
+  parcalar[2] = document.createElement("p");
+  parcalar[3] = document.createElement("p");
+  parcalar[4] = document.createElement("p");
+  parcalar[5] = document.createElement("button");
+
+  parcalar[1].className = "tarih";
+  parcalar[5].className = "expandButton";
+
+  let dataDegerler = Object.values(data[index]); 
+  let sayac = 0;
+
+  parcalar.forEach(element => {
+    parent2.appendChild(element);
+    element.textContent = dataDegerler[sayac];
+    sayac++;
+  });
+
+  parcalar[5].textContent = "+";
+
+  parcalar[5].addEventListener("click", ()=>{
+    if(parent2.classList.contains("article-open"))
+      parent2.classList.remove("article-open");
+    else 
+    parent2.classList.add("article-open");
+  });
+
+  let haber = {
+    divEt: parent2,
+    baslik: parcalar[0],
+    tarih: parcalar[1],
+    birinciP: parcalar[2],
+    ikinciP: parcalar[3],
+    ucuncuP: parcalar[4],
+    acBtn: parcalar[5]
+  };
+
+  return haber;
+}
+
+data[data.length] = {
+  baslik: "Kendi Eklediğim Haber!",
+  tarih: "6 Temmuz 2023",
+  ilkParagraf: "Cras ac bibendum ipsum, eget aliquam tortor. Curabitur tempor, lectus id aliquet pharetra, mauris ligula pharetra orci, in lacinia nisl massa id nulla. Quisque viverra, leo vel pulvinar iaculis, ipsum diam rhoncus ex, quis mollis purus urna non metus. Morbi efficitur porta bibendum. Vivamus sem erat, blandit a eros at, tincidunt consequat massa. Vivamus nisl metus, pulvinar sollicitudin neque gravida, semper commodo massa. Integer lobortis tincidunt elit, ut pellentesque arcu laoreet quis.",
+  ikinciParagraf: "Maecenas et convallis erat. Donec volutpat magna tristique neque egestas, id convallis felis porta. Vestibulum non ultricies odio. In egestas leo neque, eget commodo massa rutrum sed. Pellentesque neque magna, aliquam pretium placerat et, eleifend varius tellus. Suspendisse faucibus justo ligula, ut tempor mauris posuere eget. Vestibulum ac ante a leo fringilla mollis non commodo elit. Phasellus urna nulla, dictum et viverra non, auctor sed nibh. Mauris accumsan massa interdum nunc vestibulum, dictum gravida justo vulputate. Donec a rhoncus ligula. Donec ut est ut lorem ornare efficitur in non urna. Duis blandit tellus ac nulla ornare, nec ultricies purus laoreet.",
+  ucuncuParagraf: "Nullam et libero est. Proin pharetra ultricies massa, eget gravida mauris posuere eget. Vestibulum id velit nec ipsum faucibus auctor. Duis eget vestibulum magna. Maecenas a est scelerisque nisi iaculis efficitur non in purus. Vestibulum sapien tellus, auctor ac facilisis et, pretium ut diam. Donec imperdiet luctus nunc vitae varius. Praesent in interdum nunc. Donec vitae dolor ac nibh pellentesque tincidunt. Maecenas tincidunt laoreet egestas. Nam condimentum at odio a suscipit. Vivamus est diam, gravida sed pellentesque efficitur, tincidunt a dui. Suspendisse a ligula interdum, ornare purus accumsan, bibendum mi. Nullam blandit quis sapien non dapibus. Cras blandit magna ac accumsan volutpat. Sed ultricies aliquet justo a lobortis."
+};
+
+for(let i = 0; i < data.length; i++) {
+  haberYapici(i);
+}
